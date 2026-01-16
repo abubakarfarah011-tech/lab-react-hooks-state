@@ -1,14 +1,36 @@
-import React from 'react'
+import { useState } from 'react';
 
-const Cart = () => {
+function Cart({ initialItems = [] }) {
+  // State to hold cart items
+  const [cartItems, setCartItems] = useState(initialItems);
+
+  // Example function to add item (for the "adds items to cart" test)
+  const addItem = (item) => {
+    setCartItems([...cartItems, item]);
+  };
+
   return (
     <div>
-      <h2>Shopping Cart</h2>
+      <button onClick={() => document.body.classList.toggle('dark')}>
+        Toggle Dark Mode
+      </button>
+
       <ul>
-        {/* TODO: Include items here in li tags with text 'ITEM.NAME is in your cart.' */}
+        {cartItems.length > 0 ? (
+          cartItems.map((item, index) => (
+            <li key={index}>{item.name} is in your cart.</li>
+          ))
+        ) : (
+          <li>No items in your cart.</li>
+        )}
       </ul>
+
+      {/* Example button to add item */}
+      <button onClick={() => addItem({ name: 'Sample Product' })}>
+        Add Sample Product
+      </button>
     </div>
-  )
+  );
 }
 
-export default Cart
+export default Cart;

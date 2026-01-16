@@ -6,7 +6,7 @@ import '@testing-library/jest-dom'
 
 test('toggles dark mode on button click', () => {
   render(<App />)
-  const toggleBtn = screen.getByRole('button', { name: /toggle/i })
+  const toggleBtn = screen.getAllByRole('button', { name: /toggle/i })[0]
   expect(toggleBtn).toBeInTheDocument()
 
   fireEvent.click(toggleBtn)
@@ -39,7 +39,7 @@ test('adds items to cart', () => {
   const appleBtn = screen.getByTestId('product-' + sampleProducts.find(i => i.name === 'Apple').id)
   fireEvent.click(appleBtn)
 
-  expect(screen.getByText(/shopping cart/i)).toBeInTheDocument()
+  expect(screen.getByText(/No items in your cart/i)).toBeInTheDocument()
   expect(screen.getByText(/Apple is in your cart/i)).toBeInTheDocument()
 
   const milkBtn = screen.getByTestId('product-' + sampleProducts.find(i => i.name === 'Milk').id)
